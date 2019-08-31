@@ -15,7 +15,7 @@ public class Chapters extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(linearLayoutManager);
-        ChapterAdapter adapter = new ChapterAdapter(this,DataFakeGenerator.getChapters());
+        ChapterAdapter adapter = new ChapterAdapter(this, Repository.getChapters());
         recyclerView.setAdapter(adapter);
     }
 }
