@@ -1,10 +1,10 @@
-package com.dushreza.festive.test;
+package com.dushreza.festive.test.model;
 
 public class Chapter {
-    int id;
-    String title;
-    String content;
-    String image;
+    private int id;
+    private String title;
+    private String content;
+    private String image;
 
     public int getId() {
         return id;

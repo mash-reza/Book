@@ -1,8 +1,7 @@
-package com.dushreza.festive.test;
+package com.dushreza.festive.test.view.activity;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.dushreza.festive.test.R;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,15 +17,26 @@ import java.io.InputStream;
 public class Description extends AppCompatActivity {
 
     private static final String TAG = "Description";
+    public static final String DISCRIPTION_BACKGROUND = "images/list_description_background.jpg";
+
 
     TextView title;
     TextView content;
     ImageView image;
+    ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_description);
+
+        imageView = findViewById(R.id.description_background);
+        try {
+            imageView.setImageDrawable(Drawable.createFromStream(this.getAssets().open(DISCRIPTION_BACKGROUND),""));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         Intent intent = getIntent();
         title = findViewById(R.id.description_title);
         content = findViewById(R.id.description_text);
