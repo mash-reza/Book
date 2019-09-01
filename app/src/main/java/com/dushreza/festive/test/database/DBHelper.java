@@ -1,4 +1,4 @@
-package com.dushreza.festive.test;
+package com.dushreza.festive.test.database;
 
 import android.content.Context;
 import android.database.SQLException;
@@ -16,7 +16,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String TAG = "DBHelper";
     private SQLiteDatabase database;
     private Context context;
-    private static final String DATABASE_NAME = "databases/Book.db";
+    private static final String DATABASE_NAME = "Book.db";
     private static String DATABASE_PATH;
     private static final int DATABASE_VERSION = 1;
 
