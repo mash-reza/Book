@@ -42,7 +42,8 @@ public class Sqlite extends SQLiteOpenHelper {
         } else
             return instance;
     }
-    public void close(){
+
+    public void close() {
         database.close();
     }
 
@@ -119,12 +120,17 @@ public class Sqlite extends SQLiteOpenHelper {
         return chapters;
     }
 
-    public List<Chapter> getChaptersBySearch() {
+    public List<Chapter> getChapters(String searchParam) {
         List<Chapter> chapters = new ArrayList<>();
 
+        Cursor cursor = database.rawQuery("select * from chapter where (title like " + "'" + searchParam + "'" + " or content like " + "'" + searchParam +"'"+ ")", null);
+        while (cursor.moveToNext())
+            chapters.add(new Chapter(cursor.getInt(cursor.getColumnIndexOrThrow("id")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("title")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("content")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("image"))));
 
+        cursor.close();
         return chapters;
     }
-
-
 }

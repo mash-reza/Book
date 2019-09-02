@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.dushreza.festive.test.R;
+import com.example.book.R;
 
 import java.io.IOException;
 import java.io.InputStream;

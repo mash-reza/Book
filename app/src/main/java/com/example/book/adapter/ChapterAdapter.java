@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.book.model.Chapter;
 import com.example.book.view.activity.Description;
-import com.dushreza.festive.test.R;
+import com.example.book.R;
 
 import java.io.IOException;
 import java.io.InputStream;

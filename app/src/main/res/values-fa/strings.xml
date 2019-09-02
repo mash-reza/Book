@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">کتاب</string>
+    <string name="app_label">جستجو</string>
+    <string name="search_hint">جستجو در عنوان یا متن</string>
+    <string name="search_view">جستجو کن</string>
 </resources>

@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Book</string>
+    <string name="app_label">Search Feature</string>
+    <string name="search_hint">Search in title or content</string>
+    <string name="search_view">Enter search</string>
 </resources>

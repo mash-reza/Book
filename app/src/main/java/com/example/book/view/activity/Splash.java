@@ -10,7 +10,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.dushreza.festive.test.R;
+import com.example.book.R;
 
 import java.io.IOException;
 

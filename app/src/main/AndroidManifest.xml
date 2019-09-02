@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.dushreza.festive.test">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.book">
 
     <application
         android:allowBackup="true"
@@ -8,9 +9,17 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name="com.example.book.view.activity.Description"></activity>
-        <activity android:name="com.example.book.view.activity.Chapters" />
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name="com.example.book.view.activity.Description"/>
+        <activity android:name="com.example.book.view.activity.Chapters"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <!-->this is for search part</!-->
+                <action android:name="android.intent.action.SEARCH"/>
+            </intent-filter>
+            <meta-data android:name="com.example.book" android:resource="@xml/searchable"/>
+        </activity>
         <activity android:name="com.example.book.view.activity.Splash" android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
