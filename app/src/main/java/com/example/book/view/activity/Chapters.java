@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.book.adapter.ChapterAdapter;
@@ -19,6 +21,7 @@ public class Chapters extends AppCompatActivity {
     public static final String LIST_BACKGROUND = "images/list_description_background.jpg";
     ImageView imageView;
 
+    EditText search;
     RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,21 +35,35 @@ public class Chapters extends AppCompatActivity {
             e.printStackTrace();
         }
 
+
+        search = findViewById(R.id.search_edit_text);
+        search.setOnEditorActionListener((v, actionId, event) -> {
+            if(actionId == EditorInfo.IME_ACTION_SEARCH){
+
+            }
+            return false;
+        });
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         //Repository repository = new Repository(this);
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(linearLayoutManager);
 
         //DataBase
-        Sqlite sqlite = new Sqlite(this);
-        try {
-            sqlite.createDatabase();
-            sqlite.openDataBase();
-        }catch (IOException e){
-            Log.e(TAG, "onCreate: ",e );
-        }
+//        Sqlite sqlite = new Sqlite(this);
+//        try {
+//            sqlite.createDatabase();
+//            sqlite.openDataBase();
+//        }catch (IOException e){
+//            Log.e(TAG, "onCreate: ",e );
+//        }
 
-        ChapterAdapter adapter = new ChapterAdapter(this, sqlite.getChapters());
+        ChapterAdapter adapter = null;
+        try {
+            adapter = new ChapterAdapter(this, Sqlite.getInstance(this).getChapters());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         recyclerView.setAdapter(adapter);
     }
 }

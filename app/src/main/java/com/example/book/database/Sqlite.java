@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.support.constraint.ConstraintLayout;
 
 import com.example.book.model.Chapter;
 
@@ -22,6 +23,7 @@ public class Sqlite extends SQLiteOpenHelper {
 
     private SQLiteDatabase database;
     private Context context;
+    private static Sqlite instance;
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -31,8 +33,20 @@ public class Sqlite extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
     }
 
+    public static synchronized Sqlite getInstance(Context context) throws IOException {
+        if (instance == null) {
+            instance = new Sqlite(context);
+            instance.createDatabase();
+            instance.openDataBase();
+            return instance;
+        } else
+            return instance;
+    }
+    public void close(){
+        database.close();
+    }
 
-    public Sqlite(Context context) {
+    private Sqlite(Context context) {
         super(context, DATABASE_BOOK_NAME, null, 1);
         this.context = context;
     }
@@ -102,6 +116,13 @@ public class Sqlite extends SQLiteOpenHelper {
                     cursor.getString(cursor.getColumnIndexOrThrow("image"))));
         }
         cursor.close();
+        return chapters;
+    }
+
+    public List<Chapter> getChaptersBySearch() {
+        List<Chapter> chapters = new ArrayList<>();
+
+
         return chapters;
     }
 
