@@ -1,7 +1,8 @@
-package com.dushreza.festive.test.view.activity;
+package com.example.book.view.activity;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,7 +21,6 @@ public class Description extends AppCompatActivity {
     public static final String DISCRIPTION_BACKGROUND = "images/list_description_background.jpg";
 
 
-    TextView title;
     TextView content;
     ImageView image;
     ImageView imageView;
@@ -30,6 +30,9 @@ public class Description extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_description);
 
+        ActionBar actionBar = getSupportActionBar();
+
+
         imageView = findViewById(R.id.description_background);
         try {
             imageView.setImageDrawable(Drawable.createFromStream(this.getAssets().open(DISCRIPTION_BACKGROUND),""));
@@ -38,10 +41,9 @@ public class Description extends AppCompatActivity {
         }
 
         Intent intent = getIntent();
-        title = findViewById(R.id.description_title);
+        actionBar.setTitle(intent.getStringExtra("title"));
         content = findViewById(R.id.description_text);
         image = findViewById(R.id.description_image);
-        title.setText(intent.getStringExtra("title"));
         content.setText(intent.getStringExtra("content"));
 
         InputStream in = null;

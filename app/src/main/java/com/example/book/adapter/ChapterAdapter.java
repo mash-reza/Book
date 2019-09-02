@@ -1,4 +1,4 @@
-package com.dushreza.festive.test.adapter;
+package com.example.book.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,8 +13,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.dushreza.festive.test.model.Chapter;
-import com.dushreza.festive.test.view.activity.Description;
+import com.example.book.model.Chapter;
+import com.example.book.view.activity.Description;
 import com.dushreza.festive.test.R;
 
 import java.io.IOException;

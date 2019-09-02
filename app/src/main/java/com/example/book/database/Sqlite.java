@@ -1,4 +1,4 @@
-package com.dushreza.festive.test.database;
+package com.example.book.database;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -6,7 +6,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.dushreza.festive.test.model.Chapter;
+import com.example.book.model.Chapter;
 
 import java.io.File;
 import java.io.FileOutputStream;

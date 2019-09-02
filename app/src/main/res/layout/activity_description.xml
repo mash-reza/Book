@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.activity.Description">
+    tools:context="com.example.book.view.activity.Description">
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,32 +15,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/description_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:text="TextView"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+
 
         <ImageView
             android:id="@+id/description_image"
-
-            android:layout_width="120dp"
-            android:layout_height="118dp"
+            android:layout_width="wrap_content"
+            android:layout_height="128dp"
+            android:maxWidth="256dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/description_title"
-            tools:srcCompat="@tools:sample/avatars" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/description_text"
@@ -51,7 +39,8 @@
             android:layout_marginEnd="16dp"
             android:textColor="@android:color/black"
             android:textSize="18sp"
-            app:layout_constraintTop_toBottomOf="@+id/description_image" />
+            app:layout_constraintTop_toBottomOf="@+id/description_image"
+            android:background="@android:color/white"/>
 
     </android.support.constraint.ConstraintLayout>
 

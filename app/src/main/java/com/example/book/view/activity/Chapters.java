@@ -1,4 +1,4 @@
-package com.dushreza.festive.test.view.activity;
+package com.example.book.view.activity;
 
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
@@ -8,9 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.ImageView;
 
-import com.dushreza.festive.test.adapter.ChapterAdapter;
+import com.example.book.adapter.ChapterAdapter;
 import com.dushreza.festive.test.R;
-import com.dushreza.festive.test.database.Sqlite;
+import com.example.book.database.Sqlite;
 
 import java.io.IOException;
 

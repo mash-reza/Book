@@ -1,4 +1,4 @@
-package com.dushreza.festive.test;
+package com.example.book;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

@@ -1,4 +1,4 @@
-package com.dushreza.festive.test.database;
+package com.example.book.database;
 
 import android.content.Context;
 import android.database.SQLException;

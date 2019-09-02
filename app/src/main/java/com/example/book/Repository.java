@@ -1,8 +1,6 @@
-package com.dushreza.festive.test;
+package com.example.book;
 
-import android.content.Context;
-
-import com.dushreza.festive.test.model.Chapter;
+import com.example.book.model.Chapter;
 
 import java.util.ArrayList;
 import java.util.List;

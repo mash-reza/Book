@@ -1,4 +1,4 @@
-package com.dushreza.festive.test.model;
+package com.example.book.model;
 
 public class Chapter {
     private int id;
