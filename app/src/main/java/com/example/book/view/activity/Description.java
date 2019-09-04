@@ -1,10 +1,12 @@
 package com.example.book.view.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -35,13 +37,15 @@ public class Description extends AppCompatActivity {
 
         imageView = findViewById(R.id.description_background);
         try {
-            imageView.setImageDrawable(Drawable.createFromStream(this.getAssets().open(DISCRIPTION_BACKGROUND),""));
+            imageView.setImageDrawable(Drawable.createFromStream(this.getAssets().open(DISCRIPTION_BACKGROUND), ""));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         Intent intent = getIntent();
         actionBar.setTitle(intent.getStringExtra("title"));
+
+
         content = findViewById(R.id.description_text);
         image = findViewById(R.id.description_image);
         content.setText(intent.getStringExtra("content"));
@@ -49,14 +53,20 @@ public class Description extends AppCompatActivity {
         InputStream in = null;
         try {
             in = this.getAssets().open("images/" + intent.getStringExtra("image"));
-            Log.i(TAG, "onCreate: "+intent.getStringExtra("image"));
+            Log.i(TAG, "onCreate: " + intent.getStringExtra("image"));
 //            in = this.getAssets().open("images/01.jpg");
         } catch (IOException e) {
             System.err.println(e);
         }
-        Drawable drawable = Drawable.createFromStream(in,"image");
+        Drawable drawable = Drawable.createFromStream(in, "image");
 
         Glide.with(this).load(drawable).into(image);
-    }
 
+        PreferenceManager.setDefaultValues(this, R.xml.prefrences, false);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        float size = Float.parseFloat(preferences.getString("key_text_size", "18"));
+        Log.i(TAG, "onCreate: " + preferences.getString("key_text_size", "18"));
+        Log.i(TAG, "onCreate: " + size);
+        content.setTextSize(size);
+    }
 }

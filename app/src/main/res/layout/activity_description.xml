@@ -38,7 +38,6 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:textColor="@android:color/black"
-            android:textSize="18sp"
             app:layout_constraintTop_toBottomOf="@+id/description_image"
             android:background="@android:color/white"/>
 

@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".view.activity.Settings"></activity>
+        <activity android:name=".view.activity.Settings" >
+        </activity>
         <activity android:name=".view.activity.AppCompatPreferences" />
         <activity android:name=".view.activity.Description" />
         <activity
@@ -26,6 +27,7 @@
             <meta-data
                 android:name="com.example.book"
                 android:resource="@xml/searchable" />
+
         </activity>
         <activity
             android:name=".view.activity.Splash"
