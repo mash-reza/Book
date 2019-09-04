@@ -2,6 +2,7 @@ package com.example.book.view.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -67,6 +68,8 @@ public class Description extends AppCompatActivity {
         float size = Float.parseFloat(preferences.getString("key_text_size", "18"));
         Log.i(TAG, "onCreate: " + preferences.getString("key_text_size", "18"));
         Log.i(TAG, "onCreate: " + size);
+        String font = preferences.getString("key_text_font", "comic.ttf");
+        content.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/" + font));
         content.setTextSize(size);
     }
 }

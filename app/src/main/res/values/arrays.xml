@@ -12,17 +12,15 @@
         <item>38</item>
         <item>18</item>
     </string-array>
-    <string-array name="pref_text_fonts_entries">
+    <string-array name="pref_text_font_entries">
         <item>impact</item>
-        <item>medium</item>
-        <item>large</item>
-        <item>Original</item>
+        <item>comic</item>
+        <item>consolas</item>
     </string-array>
-    <string-array name="pref_text_fonts_values">
-        <item>18</item>
-        <item>28</item>
-        <item>38</item>
-        <item>18</item>
+    <string-array name="pref_text_font_values">
+        <item>impact.ttf</item>
+        <item>comic.ttf</item>
+        <item>consolas.ttf</item>
     </string-array>
 
 </resources>
