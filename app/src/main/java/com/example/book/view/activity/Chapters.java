@@ -107,6 +107,9 @@ public class Chapters extends AppCompatActivity {
             case R.id.search:
                 onSearchRequested();
                 return true;
+            case R.id.settings:
+                startActivity(new Intent(Chapters.this,Settings.class));
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

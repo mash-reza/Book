@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="General">
+        <ListPreference android:title="Text Size"
+            android:defaultValue="1"
+            android:summary="set preferred app's text size"
+            android:entries="@array/pref_text_sizes_entries"
+            android:entryValues="@array/pref_text_sizes_values"
+            android:key="key_text_size"
+            android:dialogTitle="size"/>
+    </PreferenceCategory>
+</PreferenceScreen>

@@ -11,16 +11,25 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="com.example.book.view.activity.Description"/>
-        <activity android:name="com.example.book.view.activity.Chapters"
+        <activity android:name=".view.activity.Settings"></activity>
+        <activity android:name=".view.activity.AppCompatPreferences" />
+        <activity android:name=".view.activity.Description" />
+        <activity
+            android:name=".view.activity.Chapters"
             android:launchMode="singleTop">
             <intent-filter>
-                <!-->this is for search part</!-->
-                <action android:name="android.intent.action.SEARCH"/>
+
+                <!-- >this is for search part</! -->
+                <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
-            <meta-data android:name="com.example.book" android:resource="@xml/searchable"/>
+
+            <meta-data
+                android:name="com.example.book"
+                android:resource="@xml/searchable" />
         </activity>
-        <activity android:name="com.example.book.view.activity.Splash" android:theme="@style/AppTheme">
+        <activity
+            android:name=".view.activity.Splash"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -3,4 +3,5 @@
     <string name="app_label">Search Feature</string>
     <string name="search_hint">Search in title or content</string>
     <string name="search_view">Enter search</string>
+    <string name="setting_menu_item_title">Settings</string>
 </resources>
