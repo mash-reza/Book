@@ -5,14 +5,17 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.book.database.Sqlite;
 import com.example.book.model.Chapter;
 import com.example.book.view.activity.Description;
 import com.example.book.R;
@@ -22,6 +25,7 @@ import java.io.InputStream;
 import java.util.List;
 
 public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.MyHolder> {
+    private static final String TAG = "ChapterAdapter";
     private Context context;
     private List<Chapter> chapters;
 
@@ -55,6 +59,44 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.MyHolder
             intent.putExtra("content", chapters.get(i).getContent());
             context.startActivity(intent);
         });
+
+        if (chapters.get(i).getFavorite() == 0) {
+            myHolder.favorite.setImageDrawable(context.getResources().getDrawable(R.drawable.favorites_border));
+            myHolder.favorite.setTag(0);
+        } else {
+            myHolder.favorite.setImageDrawable(context.getResources().getDrawable(R.drawable.favorites));
+            myHolder.favorite.setTag(1);
+        }
+        myHolder.favorite.setOnClickListener(v -> {
+            if (myHolder.favorite.getTag().equals(0)) {
+                myHolder.favorite.setTag(1);
+                try {
+                    Log.i(TAG, "onBindViewHolder: "+i);
+                    Log.i(TAG, "onBindViewHolder: get before " + Sqlite.getInstance(context).getChapterFavorite(chapters.get(i).getId()));
+                    Sqlite.getInstance(context).setChapterFavorite(chapters.get(i).getId(), true);
+                    Log.i(TAG, "onBindViewHolder: get after " + Sqlite.getInstance(context).getChapterFavorite(chapters.get(i).getId()));
+
+                    Log.i(TAG, "onBindViewHolder: " + chapters.get(i).getFavorite());
+                } catch (IOException e) {
+                    Log.e(TAG, "onBindViewHolder: ", e);
+                }
+                myHolder.favorite.setImageDrawable(context.getResources().getDrawable(R.drawable.favorites));
+                Toast.makeText(context, "liked", Toast.LENGTH_SHORT).show();
+            } else {
+                myHolder.favorite.setTag(0);
+                try {
+                    Log.i(TAG, "onBindViewHolder: get before " + Sqlite.getInstance(context).getChapterFavorite(chapters.get(i).getId()));
+                    Sqlite.getInstance(context).setChapterFavorite(chapters.get(i).getId(), false);
+                    Log.i(TAG, "onBindViewHolder: get after " + Sqlite.getInstance(context).getChapterFavorite(chapters.get(i).getId()));
+                    Log.i(TAG, "onBindViewHolder: " + chapters.get(i).getFavorite());
+                } catch (IOException e) {
+                    Log.e(TAG, "onBindViewHolder: ", e);
+                }
+                myHolder.favorite.setImageDrawable(context.getResources().getDrawable(R.drawable.favorites_border));
+                Toast.makeText(context, "disliked", Toast.LENGTH_SHORT).show();
+                //notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
@@ -66,12 +108,14 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.MyHolder
         ImageView imageView;
         TextView textView;
         RelativeLayout layout;
+        ImageView favorite;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.item_imageView);
             textView = itemView.findViewById(R.id.item_title);
             layout = itemView.findViewById(R.id.item_view);
+            favorite = itemView.findViewById(R.id.favorite_icon_recycler_view);
         }
     }
 }

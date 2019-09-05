@@ -98,7 +98,7 @@ public class Sqlite extends SQLiteOpenHelper {
     public void openDataBase() throws SQLException {
         File outFile = context.getDatabasePath(DATABASE_BOOK_NAME);
         String myPath = outFile.getPath();
-        database = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
+        database = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
     }
 
     public List<Chapter> getChapters() {
@@ -121,7 +121,7 @@ public class Sqlite extends SQLiteOpenHelper {
     public List<Chapter> getChapters(String searchParam) {
         List<Chapter> chapters = new ArrayList<>();
 
-        Cursor cursor = database.rawQuery("select * from chapter where (title like " + "'" + searchParam + "'" + " or content like " + "'" + searchParam +"'"+ ")", null);
+        Cursor cursor = database.rawQuery("select * from chapter where (title like " + "'" + searchParam + "'" + " or content like " + "'" + searchParam + "'" + ")", null);
         while (cursor.moveToNext())
             chapters.add(new Chapter(cursor.getInt(cursor.getColumnIndexOrThrow("id")),
                     cursor.getString(cursor.getColumnIndexOrThrow("title")),
@@ -133,7 +133,7 @@ public class Sqlite extends SQLiteOpenHelper {
         return chapters;
     }
 
-    public List<Chapter> getFavoriteChapters(){
+    public List<Chapter> getFavoriteChapters() {
         List<Chapter> chapters = new ArrayList<>();
 
         Cursor cursor = database.rawQuery("select * from chapter where favorite = 1", null);
@@ -146,5 +146,20 @@ public class Sqlite extends SQLiteOpenHelper {
 
         cursor.close();
         return chapters;
+    }
+
+    public void setChapterFavorite(int chapterId, boolean isFavorite) {
+        if (isFavorite) {
+            database.execSQL("update chapter set favorite = 1 where id = " + chapterId);
+
+        } else {
+            database.execSQL("update chapter set favorite = 0 where id = " + chapterId);
+        }
+    }
+
+    public boolean getChapterFavorite(int chapterId) {
+        Cursor cursor = database.rawQuery("select * from chapter where id = " + chapterId, null);
+        cursor.moveToFirst();
+        return cursor.getInt(cursor.getColumnIndexOrThrow("favorite")) == 1;
     }
 }
