@@ -5,5 +5,7 @@
     <string name="search_hint">جستجو در عنوان یا متن</string>
     <string name="search_view">جستجو کن</string>
     <string name="setting_menu_item_title">تنظیمات</string>
+    <string name="favorites_menu_item_title">علاقه مندی ها</string>
+
 
 </resources>

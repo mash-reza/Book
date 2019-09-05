@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.preference.ListPreference;
 import android.support.constraint.ConstraintLayout;
 
 import com.example.book.model.Chapter;
@@ -103,10 +104,6 @@ public class Sqlite extends SQLiteOpenHelper {
     public List<Chapter> getChapters() {
         List<Chapter> chapters = new ArrayList<>();
 
-//        database = this.getReadableDatabase();
-//        Cursor cursor = database.query("chapter",
-//                null, null, null, null, null, null);
-
 
         Cursor cursor = database.rawQuery("select * from chapter", null);
         while (cursor.moveToNext()) {
@@ -114,7 +111,8 @@ public class Sqlite extends SQLiteOpenHelper {
             chapters.add(new Chapter(cursor.getInt(cursor.getColumnIndexOrThrow("id")),
                     cursor.getString(cursor.getColumnIndexOrThrow("title")),
                     cursor.getString(cursor.getColumnIndexOrThrow("content")),
-                    cursor.getString(cursor.getColumnIndexOrThrow("image"))));
+                    cursor.getString(cursor.getColumnIndexOrThrow("image")),
+                    cursor.getInt(cursor.getColumnIndexOrThrow("favorite"))));
         }
         cursor.close();
         return chapters;
@@ -128,7 +126,23 @@ public class Sqlite extends SQLiteOpenHelper {
             chapters.add(new Chapter(cursor.getInt(cursor.getColumnIndexOrThrow("id")),
                     cursor.getString(cursor.getColumnIndexOrThrow("title")),
                     cursor.getString(cursor.getColumnIndexOrThrow("content")),
-                    cursor.getString(cursor.getColumnIndexOrThrow("image"))));
+                    cursor.getString(cursor.getColumnIndexOrThrow("image")),
+                    cursor.getInt(cursor.getColumnIndexOrThrow("favorite"))));
+
+        cursor.close();
+        return chapters;
+    }
+
+    public List<Chapter> getFavoriteChapters(){
+        List<Chapter> chapters = new ArrayList<>();
+
+        Cursor cursor = database.rawQuery("select * from chapter where favorite = 1", null);
+        while (cursor.moveToNext())
+            chapters.add(new Chapter(cursor.getInt(cursor.getColumnIndexOrThrow("id")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("title")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("content")),
+                    cursor.getString(cursor.getColumnIndexOrThrow("image")),
+                    cursor.getInt(cursor.getColumnIndexOrThrow("favorite"))));
 
         cursor.close();
         return chapters;

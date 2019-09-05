@@ -5,6 +5,7 @@ public class Chapter {
     private String title;
     private String content;
     private String image;
+    private int favorite;
 
     public int getId() {
         return id;
@@ -38,10 +39,19 @@ public class Chapter {
         this.image = image;
     }
 
-    public Chapter(int id, String title, String content, String image) {
+    public int getFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(int favorite) {
+        this.favorite = favorite;
+    }
+
+    public Chapter(int id, String title, String content, String image, int favorite) {
         this.id = id;
         this.title = title;
         this.content = content;
         this.image = image;
+        this.favorite = favorite;
     }
 }

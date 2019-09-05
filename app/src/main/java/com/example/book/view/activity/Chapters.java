@@ -127,6 +127,9 @@ public class Chapters extends AppCompatActivity {
             case R.id.settings:
                 startActivity(new Intent(Chapters.this, Settings.class));
                 return true;
+            case R.id.favorites:
+                startActivity(new Intent(Chapters.this, Favorites.class));
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -147,7 +150,7 @@ public class Chapters extends AppCompatActivity {
     private void search(String query) throws IOException {
 //        SearchAdapter adapter = new SearchAdapter(this, Sqlite.getInstance(this).getChapters(query));
         Log.i(TAG, "search: " + "method ran");
-        SearchAdapter adapter = new SearchAdapter(this, Repository.getChapters());
+        SearchAdapter adapter = new SearchAdapter(this, Sqlite.getInstance(this).getChapters(query));
         listView.setAdapter(adapter);
     }
 
