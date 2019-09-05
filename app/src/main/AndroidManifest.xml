@@ -13,7 +13,6 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".view.activity.Settings" >
         </activity>
-        <activity android:name=".view.activity.AppCompatPreferences" />
         <activity android:name=".view.activity.Description" />
         <activity
             android:name=".view.activity.Chapters"

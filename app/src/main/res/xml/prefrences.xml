@@ -18,5 +18,16 @@
             android:key="key_text_font"
             android:summary="set preferred app's text font"
             android:title="Text Font" />
-    </android.support.v7.preference.PreferenceCategory>
-</android.support.v7.preference.PreferenceScreen>
+        <!-->
+        <android.support.v7.preference.SeekBarPreference
+            android:defaultValue="10"
+            android:dialogTitle="font"
+            android:entries="@array/pref_notification_volume_entries"
+            android:entryValues="@array/pref_notification_volume_values"
+            android:key="key_notification_volume"
+            android:summary="set app notification sound volume"
+            android:title="Ringtone" />
+        <!-->
+
+            </android.support.v7.preference.PreferenceCategory>
+        </android.support.v7.preference.PreferenceScreen>

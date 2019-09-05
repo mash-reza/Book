@@ -35,7 +35,6 @@ public class Settings extends AppCompatActivity {
         public void onCreatePreferences(Bundle bundle, String s) {
             setPreferencesFromResource(R.xml.prefrences, s);
         }
-
     }
-
+    
 }

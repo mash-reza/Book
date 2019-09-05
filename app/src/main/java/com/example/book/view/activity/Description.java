@@ -1,5 +1,6 @@
 package com.example.book.view.activity;
 
+import android.support.v7.preference.SeekBarPreference;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
@@ -27,12 +28,12 @@ public class Description extends AppCompatActivity {
     TextView content;
     ImageView image;
     ImageView imageView;
+    SeekBarPreference seekBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_description);
-
         ActionBar actionBar = getSupportActionBar();
 
 
