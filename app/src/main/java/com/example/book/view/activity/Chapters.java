@@ -4,6 +4,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,7 +23,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 
-import com.example.book.Repository;
 import com.example.book.adapter.ChapterAdapter;
 import com.example.book.R;
 import com.example.book.adapter.SearchAdapter;
@@ -72,8 +72,6 @@ public class Chapters extends AppCompatActivity {
             e.printStackTrace();
         }
         recyclerView.setAdapter(adapter);
-
-
     }
 
     @Override
@@ -163,7 +161,5 @@ public class Chapters extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-
     }
-
 }

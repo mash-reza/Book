@@ -13,13 +13,11 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import com.example.book.database.Sqlite;
 import com.example.book.model.Chapter;
 import com.example.book.view.activity.Description;
 import com.example.book.R;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -37,7 +35,7 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.MyHolder
     @NonNull
     @Override
     public ChapterAdapter.MyHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new MyHolder(LayoutInflater.from(context).inflate(R.layout.item, viewGroup, false));
+        return new MyHolder(LayoutInflater.from(context).inflate(R.layout.recycler_view_item, viewGroup, false));
     }
 
     @Override
@@ -59,7 +57,6 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.MyHolder
             intent.putExtra("content", chapters.get(i).getContent());
             context.startActivity(intent);
         });
-
         if (chapters.get(i).getFavorite() == 0) {
             myHolder.favorite.setImageDrawable(context.getResources().getDrawable(R.drawable.favorites_border));
             myHolder.favorite.setTag(0);
@@ -71,7 +68,7 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.MyHolder
             if (myHolder.favorite.getTag().equals(0)) {
                 myHolder.favorite.setTag(1);
                 try {
-                    Log.i(TAG, "onBindViewHolder: "+i);
+                    Log.i(TAG, "onBindViewHolder: " + i);
                     Log.i(TAG, "onBindViewHolder: get before " + Sqlite.getInstance(context).getChapterFavorite(chapters.get(i).getId()));
                     Sqlite.getInstance(context).setChapterFavorite(chapters.get(i).getId(), true);
                     Log.i(TAG, "onBindViewHolder: get after " + Sqlite.getInstance(context).getChapterFavorite(chapters.get(i).getId()));
@@ -97,6 +94,7 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.MyHolder
                 //notifyDataSetChanged();
             }
         });
+
     }
 
     @Override

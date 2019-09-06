@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.example.book.R;
 import com.example.book.adapter.ChapterAdapter;
+import com.example.book.adapter.FavoriteAdapter;
 import com.example.book.database.Sqlite;
 
 import java.io.IOException;
@@ -21,9 +22,9 @@ public class Favorites extends AppCompatActivity {
         recyclerView = findViewById(R.id.favorites_recycler_view);
         LinearLayoutManager manager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(manager);
-        ChapterAdapter adapter = null;
+        FavoriteAdapter adapter = null;
         try {
-            adapter = new ChapterAdapter(this, Sqlite.getInstance(this).getFavoriteChapters());
+            adapter = new FavoriteAdapter(this, Sqlite.getInstance(this).getFavoriteChapters());
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,7 +1,6 @@
 package com.example.book.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +41,7 @@ public class SearchAdapter extends BaseAdapter {
         ViewHolder holder;
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = inflater.inflate(R.layout.list_item,parent,false);
+            convertView = inflater.inflate(R.layout.search_list_item,parent,false);
             holder.textView = convertView.findViewById(R.id.list_item_search);
             convertView.setTag(holder);
         }else {
