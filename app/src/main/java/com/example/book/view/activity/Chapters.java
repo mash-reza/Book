@@ -141,13 +141,8 @@ public class Chapters extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         searchRecyclerView.setAdapter(null);
         searchRecyclerView.setVisibility(View.GONE);
     }
-
-
-
-
-
-
 }
