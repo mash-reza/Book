@@ -130,7 +130,7 @@ public class Sqlite extends SQLiteOpenHelper {
     public List<Chapter> getChapters(String searchParam) {
         List<Chapter> chapters = new ArrayList<>();
 
-        Cursor cursor = getWritableDatabase().rawQuery("select * from chapter where (title like " + "'%" + searchParam + "%'" + " or content like " + "'" + searchParam + "'" + ")", null);
+        Cursor cursor = getWritableDatabase().rawQuery("select * from chapter where (title like " + "'%" + searchParam + "%'" + " or content like " + "'% " + searchParam + " %'" + ")", null);
         while (cursor.moveToNext())
             chapters.add(new Chapter(cursor.getInt(cursor.getColumnIndexOrThrow("id")),
                     cursor.getString(cursor.getColumnIndexOrThrow("title")),
