@@ -88,15 +88,15 @@ public class Chapters extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String s) {
 
-                FavoriteAdapter searchAdapter;
-                try {
-                    searchAdapter = new FavoriteAdapter(Chapters.this, Sqlite.getInstance(Chapters.this).getChapters(s));
-                    searchRecyclerView.setAdapter(searchAdapter);
-                } catch (IOException e) {
-                    Log.e(TAG, "onCreate: ", e);
-                }
-                searchRecyclerView.setVisibility(View.VISIBLE);
-                recyclerView.setVisibility(View.GONE);
+//                FavoriteAdapter searchAdapter;
+//                try {
+//                    searchAdapter = new FavoriteAdapter(Chapters.this, Sqlite.getInstance(Chapters.this).getChapters(s));
+//                    searchRecyclerView.setAdapter(searchAdapter);
+//                } catch (IOException e) {
+//                    Log.e(TAG, "onCreate: ", e);
+//                }
+//                searchRecyclerView.setVisibility(View.VISIBLE);
+//                recyclerView.setVisibility(View.GONE);
 
                 return false;
             }
@@ -106,19 +106,21 @@ public class Chapters extends AppCompatActivity {
                 if (s.equals("")) {
                     searchRecyclerView.setVisibility(View.GONE);
                     recyclerView.setVisibility(View.VISIBLE);
+                } else {
+                    FavoriteAdapter searchAdapter;
+                    try {
+                        searchAdapter = new FavoriteAdapter(Chapters.this, Sqlite.getInstance(Chapters.this).getChapters(s));
+                        searchRecyclerView.setAdapter(searchAdapter);
+                    } catch (IOException e) {
+                        Log.e(TAG, "onCreate: ", e);
+                    }
+                    searchRecyclerView.setVisibility(View.VISIBLE);
+                    recyclerView.setVisibility(View.GONE);
                 }
                 return false;
             }
 
         });
-//        searchView.setOnCloseListener(() -> {
-//            //listView.setAdapter(null);
-//            listView.setVisibility(View.GONE);
-//            Toast.makeText(this, "back pressed", Toast.LENGTH_SHORT).show();
-//            return false;
-//        });
-
-
         return true;
     }
 
