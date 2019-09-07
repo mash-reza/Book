@@ -5,4 +5,13 @@
     <string name="search_view">Enter search</string>
     <string name="setting_menu_item_title">Settings</string>
     <string name="favorites_menu_item_title">Favorites</string>
+    <string name="general_setting_title">General</string>
+    <string name="text_setting_title">Text Setting</string>
+    <string name="text_setting_font_name1">Comic</string>
+    <string name="text_setting_font_name2">Consolas</string>
+    <string name="text_setting_font_name3">Impact</string>
+    <string name="text_size_setting_title">Size</string>
+    <string name="text_font_setting_title">Font</string>
+
+
 </resources>

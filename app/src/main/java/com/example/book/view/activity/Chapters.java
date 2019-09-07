@@ -27,7 +27,6 @@ import android.widget.Toast;
 import com.example.book.adapter.ChapterAdapter;
 import com.example.book.R;
 import com.example.book.adapter.FavoriteAdapter;
-import com.example.book.adapter.SearchAdapter;
 import com.example.book.database.Sqlite;
 
 import java.io.IOException;
@@ -35,6 +34,9 @@ import java.io.IOException;
 public class Chapters extends AppCompatActivity {
     private static final String TAG = "Chapters";
     public static final String LIST_BACKGROUND = "images/list_description_background.jpg";
+    public static final int SETTING_REQUEST_CODE = 1;
+
+
     ImageView imageView;
 
     //SearchAdapter adapter;
@@ -48,32 +50,57 @@ public class Chapters extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chapters);
 
-        //BACKGROUND
+        setBackground();
+
+
+        //search
+        setSearch();
+
+
+        //Recyclerview
+        setChapterList();
+    }
+
+    private void setBackground() {
         imageView = findViewById(R.id.list_background);
         try {
             imageView.setImageDrawable(Drawable.createFromStream(this.getAssets().open(LIST_BACKGROUND), ""));
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
-
-        //search
+    private void setSearch() {
         searchRecyclerView = findViewById(R.id.search_recycler_view);
         LinearLayoutManager searchLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         searchRecyclerView.setLayoutManager(searchLayoutManager);
+    }
 
-
-        //Recyclerview
+    private void setChapterList() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(linearLayoutManager);
         ChapterAdapter adapter = null;
+
+        recyclerView.setAdapter(getChapterListAdapter());
+    }
+
+    private ChapterAdapter getChapterListAdapter() {
         try {
-            adapter = new ChapterAdapter(this, Sqlite.getInstance(this).getChapters());
+            return new ChapterAdapter(this, Sqlite.getInstance(this).getChapters());
         } catch (IOException e) {
             e.printStackTrace();
+            return null;
         }
-        recyclerView.setAdapter(adapter);
+    }
+
+    private FavoriteAdapter getSearchListAdapter(String s) {
+        try {
+            return new FavoriteAdapter(this, Sqlite.getInstance(this).getChapters(s));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
@@ -87,17 +114,6 @@ public class Chapters extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
-
-//                FavoriteAdapter searchAdapter;
-//                try {
-//                    searchAdapter = new FavoriteAdapter(Chapters.this, Sqlite.getInstance(Chapters.this).getChapters(s));
-//                    searchRecyclerView.setAdapter(searchAdapter);
-//                } catch (IOException e) {
-//                    Log.e(TAG, "onCreate: ", e);
-//                }
-//                searchRecyclerView.setVisibility(View.VISIBLE);
-//                recyclerView.setVisibility(View.GONE);
-
                 return false;
             }
 
@@ -107,13 +123,7 @@ public class Chapters extends AppCompatActivity {
                     searchRecyclerView.setVisibility(View.GONE);
                     recyclerView.setVisibility(View.VISIBLE);
                 } else {
-                    FavoriteAdapter searchAdapter;
-                    try {
-                        searchAdapter = new FavoriteAdapter(Chapters.this, Sqlite.getInstance(Chapters.this).getChapters(s));
-                        searchRecyclerView.setAdapter(searchAdapter);
-                    } catch (IOException e) {
-                        Log.e(TAG, "onCreate: ", e);
-                    }
+                    searchRecyclerView.setAdapter(getSearchListAdapter(s));
                     searchRecyclerView.setVisibility(View.VISIBLE);
                     recyclerView.setVisibility(View.GONE);
                 }
@@ -131,7 +141,7 @@ public class Chapters extends AppCompatActivity {
                 onSearchRequested();
                 return true;
             case R.id.settings:
-                startActivity(new Intent(Chapters.this, Settings.class));
+                startActivityForResult(new Intent(Chapters.this, Settings.class), SETTING_REQUEST_CODE);
                 return true;
             case R.id.favorites:
                 startActivity(new Intent(Chapters.this, Favorites.class));
@@ -146,5 +156,13 @@ public class Chapters extends AppCompatActivity {
         super.onBackPressed();
         searchRecyclerView.setAdapter(null);
         searchRecyclerView.setVisibility(View.GONE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == SETTING_REQUEST_CODE) {
+            recyclerView.setAdapter(getChapterListAdapter());
+        }
     }
 }

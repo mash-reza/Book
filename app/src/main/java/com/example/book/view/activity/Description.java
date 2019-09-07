@@ -28,7 +28,6 @@ public class Description extends AppCompatActivity {
     TextView content;
     ImageView image;
     ImageView imageView;
-    SeekBarPreference seekBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,12 +63,12 @@ public class Description extends AppCompatActivity {
 
         Glide.with(this).load(drawable).into(image);
 
-        PreferenceManager.setDefaultValues(this, R.xml.prefrences, false);
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        float size = Float.parseFloat(preferences.getString("key_text_size", "18"));
+
+        SharedPreferences preferences = this.getSharedPreferences(Settings.SETTINGS_PREFERENCES, MODE_PRIVATE);
+        float size = preferences.getInt(Settings.TEXT_PREF_KEY, 24);
         Log.i(TAG, "onCreate: " + preferences.getString("key_text_size", "18"));
         Log.i(TAG, "onCreate: " + size);
-        String font = preferences.getString("key_text_font", "comic.ttf");
+        String font = preferences.getString(Settings.FONT_PREF_KEY, Settings.FONT_01);
         content.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/" + font));
         content.setTextSize(size);
     }
