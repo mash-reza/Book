@@ -1,6 +1,7 @@
 package com.example.book.view.activity;
 
 import android.app.SearchManager;
+import android.app.slice.Slice;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -25,6 +26,7 @@ import android.widget.Toast;
 
 import com.example.book.adapter.ChapterAdapter;
 import com.example.book.R;
+import com.example.book.adapter.FavoriteAdapter;
 import com.example.book.adapter.SearchAdapter;
 import com.example.book.database.Sqlite;
 
@@ -36,7 +38,8 @@ public class Chapters extends AppCompatActivity {
     ImageView imageView;
 
     //SearchAdapter adapter;
-    ListView listView;
+    //ListView listView;
+    RecyclerView searchRecyclerView;
     RecyclerView recyclerView;
     SearchView searchView;
 
@@ -55,11 +58,10 @@ public class Chapters extends AppCompatActivity {
 
 
         //search
-        listView = findViewById(R.id.listview);
-        //searchView = findViewById(R.id.search);
-        //searchView.setQueryHint("Enter Search");
+        searchRecyclerView = findViewById(R.id.search_recycler_view);
+        LinearLayoutManager searchLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        searchRecyclerView.setLayoutManager(searchLayoutManager);
 
-        handleIntent(getIntent());
 
         //Recyclerview
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -85,32 +87,36 @@ public class Chapters extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
+
+                FavoriteAdapter searchAdapter;
                 try {
-                    listView.setAdapter(new SearchAdapter(Chapters.this, Sqlite.getInstance(Chapters.this).getChapters(s)));
-                    listView.setVisibility(View.VISIBLE);
-                    recyclerView.setVisibility(View.GONE);
+                    searchAdapter = new FavoriteAdapter(Chapters.this, Sqlite.getInstance(Chapters.this).getChapters(s));
+                    searchRecyclerView.setAdapter(searchAdapter);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    Log.e(TAG, "onCreate: ", e);
                 }
+                searchRecyclerView.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.GONE);
+
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String s) {
                 if (s.equals("")) {
-                    listView.setVisibility(View.GONE);
+                    searchRecyclerView.setVisibility(View.GONE);
                     recyclerView.setVisibility(View.VISIBLE);
                 }
                 return false;
             }
 
         });
-        searchView.setOnCloseListener(() -> {
-            //listView.setAdapter(null);
-            listView.setVisibility(View.GONE);
-            Toast.makeText(this, "back pressed", Toast.LENGTH_SHORT).show();
-            return false;
-        });
+//        searchView.setOnCloseListener(() -> {
+//            //listView.setAdapter(null);
+//            listView.setVisibility(View.GONE);
+//            Toast.makeText(this, "back pressed", Toast.LENGTH_SHORT).show();
+//            return false;
+//        });
 
 
         return true;
@@ -135,31 +141,13 @@ public class Chapters extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        listView.setAdapter(null);
-        listView.setVisibility(View.GONE);
+        searchRecyclerView.setAdapter(null);
+        searchRecyclerView.setVisibility(View.GONE);
     }
 
-    @Override
-    protected void onNewIntent(Intent intent) {
-        setIntent(intent);
-        handleIntent(intent);
-    }
 
-    private void search(String query) throws IOException {
-//        SearchAdapter adapter = new SearchAdapter(this, Sqlite.getInstance(this).getChapters(query));
-        Log.i(TAG, "search: " + "method ran");
-        SearchAdapter adapter = new SearchAdapter(this, Sqlite.getInstance(this).getChapters(query));
-        listView.setAdapter(adapter);
-    }
 
-    private void handleIntent(Intent intent) {
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            String query = intent.getStringExtra(SearchManager.QUERY);
-            try {
-                search(query);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+
+
+
 }
