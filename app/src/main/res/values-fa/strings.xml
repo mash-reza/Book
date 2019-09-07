@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">کتاب</string>
-    <string name="app_label">جستجو</string>
+    <string name="search_label">جستجو</string>
     <string name="search_hint">جستجو در عنوان یا متن</string>
     <string name="search_view">جستجو کن</string>
     <string name="setting_menu_item_title">تنظیمات</string>
@@ -13,6 +13,10 @@
     <string name="text_setting_font_name3">ایمپکت</string>
     <string name="text_size_setting_title">سایز</string>
     <string name="text_font_setting_title">فونت</string>
+    <string name="like_favorite_icon_click_toast_message">به لیست علاقه مندی ها افزوده شد :)</string>
+    <string name="dislike_favorite_icon_click_toast_message">از لیست علاقه مندی ها حذف شد!</string>
+
+
 
 
 

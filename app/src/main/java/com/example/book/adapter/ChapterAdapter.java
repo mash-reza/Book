@@ -87,7 +87,7 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.MyHolder
                     Log.e(TAG, "onBindViewHolder: ", e);
                 }
                 myHolder.favorite.setImageDrawable(context.getResources().getDrawable(R.drawable.favorites));
-                Toast.makeText(context, "Added to Favorites List", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,R.string.like_favorite_icon_click_toast_message, Toast.LENGTH_SHORT).show();
             } else {
                 myHolder.favorite.setTag(0);
                 try {
@@ -99,7 +99,7 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.MyHolder
                     Log.e(TAG, "onBindViewHolder: ", e);
                 }
                 myHolder.favorite.setImageDrawable(context.getResources().getDrawable(R.drawable.favorites_border));
-                Toast.makeText(context, "Removed From Favorites List", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,R.string.dislike_favorite_icon_click_toast_message, Toast.LENGTH_SHORT).show();
                 //notifyDataSetChanged();
             }
         });

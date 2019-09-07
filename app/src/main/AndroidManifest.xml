@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".view.activity.Favorites"/>
+        <activity android:name=".view.activity.Favorites" android:parentActivityName=".view.activity.Chapters"/>
         <activity android:name=".view.activity.Settings"/>
         <activity android:name=".view.activity.Description" android:parentActivityName=".view.activity.Chapters" />
         <activity

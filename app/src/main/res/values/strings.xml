@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Book</string>
-    <string name="app_label">Search Feature</string>
+    <string name="search_label">Search Feature</string>
     <string name="search_hint">Search in title or content</string>
     <string name="search_view">Enter search</string>
     <string name="setting_menu_item_title">Settings</string>
@@ -12,6 +12,8 @@
     <string name="text_setting_font_name3">Impact</string>
     <string name="text_size_setting_title">Size</string>
     <string name="text_font_setting_title">Font</string>
+    <string name="like_favorite_icon_click_toast_message">Added To Favorites List :)</string>
+    <string name="dislike_favorite_icon_click_toast_message">Removed From Favorites List!</string>
 
 
 </resources>
