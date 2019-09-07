@@ -1,14 +1,17 @@
 package com.example.book.database;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.preference.ListPreference;
 import android.support.constraint.ConstraintLayout;
+import android.util.Log;
 
 import com.example.book.model.Chapter;
+import com.example.book.view.activity.Splash;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -19,12 +22,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Sqlite extends SQLiteOpenHelper {
+    private static final String TAG = "Sqlite";
 
     public static final String DATABASE_BOOK_NAME = "Book.db";
 
     private SQLiteDatabase database;
     private Context context;
     private static Sqlite instance;
+    private static SharedPreferences preferences;
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -37,8 +42,11 @@ public class Sqlite extends SQLiteOpenHelper {
     public static synchronized Sqlite getInstance(Context context) throws IOException {
         if (instance == null) {
             instance = new Sqlite(context);
-            instance.createDatabase();
-            instance.openDataBase();
+            //Log.i(TAG, "getInstance: " + preferences.getBoolean(Splash.FIRST_LAUNCH,true));
+            if (!preferences.getBoolean(Splash.FIRST_LAUNCH, true)) {
+//                instance.createDatabase();
+                instance.openDataBase();
+            }
             return instance;
         } else
             return instance;
@@ -51,6 +59,7 @@ public class Sqlite extends SQLiteOpenHelper {
     private Sqlite(Context context) {
         super(context, DATABASE_BOOK_NAME, null, 1);
         this.context = context;
+        preferences = context.getSharedPreferences(Splash.LAUNCH_PREFERENCE, Context.MODE_PRIVATE);
     }
 
     public void createDatabase() throws IOException {
@@ -105,7 +114,7 @@ public class Sqlite extends SQLiteOpenHelper {
         List<Chapter> chapters = new ArrayList<>();
 
 
-        Cursor cursor = database.rawQuery("select * from chapter", null);
+        Cursor cursor = getWritableDatabase().rawQuery("select * from chapter", null);
         while (cursor.moveToNext()) {
 //            Log.d("SQTESTTAG", "Read: " + cursor.getString(cursor.getColumnIndexOrThrow("title")));
             chapters.add(new Chapter(cursor.getInt(cursor.getColumnIndexOrThrow("id")),
@@ -121,7 +130,7 @@ public class Sqlite extends SQLiteOpenHelper {
     public List<Chapter> getChapters(String searchParam) {
         List<Chapter> chapters = new ArrayList<>();
 
-        Cursor cursor = database.rawQuery("select * from chapter where (title like " + "'" + searchParam + "'" + " or content like " + "'" + searchParam + "'" + ")", null);
+        Cursor cursor = getWritableDatabase().rawQuery("select * from chapter where (title like " + "'" + searchParam + "'" + " or content like " + "'" + searchParam + "'" + ")", null);
         while (cursor.moveToNext())
             chapters.add(new Chapter(cursor.getInt(cursor.getColumnIndexOrThrow("id")),
                     cursor.getString(cursor.getColumnIndexOrThrow("title")),
@@ -136,7 +145,7 @@ public class Sqlite extends SQLiteOpenHelper {
     public List<Chapter> getFavoriteChapters() {
         List<Chapter> chapters = new ArrayList<>();
 
-        Cursor cursor = database.rawQuery("select * from chapter where favorite = 1", null);
+        Cursor cursor = getWritableDatabase().rawQuery("select * from chapter where favorite = 1", null);
         while (cursor.moveToNext())
             chapters.add(new Chapter(cursor.getInt(cursor.getColumnIndexOrThrow("id")),
                     cursor.getString(cursor.getColumnIndexOrThrow("title")),
@@ -150,15 +159,15 @@ public class Sqlite extends SQLiteOpenHelper {
 
     public void setChapterFavorite(int chapterId, boolean isFavorite) {
         if (isFavorite) {
-            database.execSQL("update chapter set favorite = 1 where id = " + chapterId);
+            getWritableDatabase().execSQL("update chapter set favorite = 1 where id = " + chapterId);
 
         } else {
-            database.execSQL("update chapter set favorite = 0 where id = " + chapterId);
+            getWritableDatabase().execSQL("update chapter set favorite = 0 where id = " + chapterId);
         }
     }
 
     public boolean getChapterFavorite(int chapterId) {
-        Cursor cursor = database.rawQuery("select * from chapter where id = " + chapterId, null);
+        Cursor cursor = getWritableDatabase().rawQuery("select * from chapter where id = " + chapterId, null);
         cursor.moveToFirst();
         return cursor.getInt(cursor.getColumnIndexOrThrow("favorite")) == 1;
     }

@@ -3,7 +3,7 @@
 
     <android.support.v7.preference.PreferenceCategory android:title="Text">
         <android.support.v7.preference.ListPreference
-            android:defaultValue="1"
+            android:defaultValue="18"
             android:dialogTitle="size"
             android:entries="@array/pref_text_sizes_entries"
             android:entryValues="@array/pref_text_sizes_values"
@@ -11,7 +11,7 @@
             android:summary="set preferred app's text size"
             android:title="Text Size" />
         <android.support.v7.preference.ListPreference
-            android:defaultValue="1"
+            android:defaultValue="impact.ttf"
             android:dialogTitle="font"
             android:entries="@array/pref_text_font_entries"
             android:entryValues="@array/pref_text_font_values"
